@@ -1,0 +1,3 @@
+hospitalID,password,name,email,phone,patientID,bloodType
+P001,password123,John Doe,john@example.com,5551234567,PID001,O+
+P002,password123,Jane Smith,jane@example.com,5559876543,PID002,A-
