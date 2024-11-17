@@ -21,22 +21,24 @@ public class Main {
         dataInitializer.loadInitialData();
 
         Scanner scanner = new Scanner(System.in);
+        OUTER:
         while (true) {
             System.out.println("Please select an option:");
             System.out.println("1. Sign In");
             System.out.println("2. Create a New Account");
+            System.out.println("3. Close system");
             System.out.print("Choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
-
-            if (choice == 1) {
-                if (signIn(scanner)) {
-                    break; // Exit the loop once signed in
+            scanner.nextLine();
+            switch (choice) {
+                case 1 -> {
+                    if (signIn(scanner)) {
+                        break OUTER; // Exit the loop once signed in
+                    }
                 }
-            } else if (choice == 2) {
-                createNewAccount(scanner);
-            } else {
-                System.out.println("Invalid choice. Please try again.");
+                case 2 -> createNewAccount(scanner);
+                case 3 -> System.exit(0);
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }
@@ -73,6 +75,20 @@ public class Main {
         System.out.println("Create a New Account:");
         System.out.print("Enter role (doctor/patient/pharmacist/administrator): ");
         String role = scanner.nextLine().toLowerCase();
+
+        if (role.equals("doctor") || role.equals("pharmacist") || role.equals("administrator")) {
+            // Verify administrator credentials
+            System.out.print("Enter Administrator Hospital ID: ");
+            String adminHospitalID = scanner.nextLine();
+            System.out.print("Enter Administrator Password: ");
+            String adminPassword = scanner.nextLine();
+        
+            User admin = authenticationService.authenticate(adminHospitalID, adminPassword);
+            if (admin == null || !(admin instanceof Administrator)) {
+                System.out.println("Invalid administrator credentials. Account creation aborted.");
+                return;
+            }
+        }
 
         System.out.print("Enter Hospital ID: ");
         String hospitalID = scanner.nextLine();
@@ -120,7 +136,10 @@ public class Main {
             System.out.println("9. Logout");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
-                case 1 -> medicalRecordService.viewMedicalRecords(scanner.nextLine());
+                case 1 -> {
+                    System.out.println("Enter Patient ID");
+                    medicalRecordService.viewMedicalRecords(scanner.nextLine());
+                }
                 case 2 -> {
                     System.out.print("Enter new email: ");
                     String email = scanner.nextLine();
@@ -153,7 +172,7 @@ public class Main {
                 }
                 case 7 -> appointmentService.viewPatientAppointments(scanner.nextLine());
                 case 8 -> medicalRecordService.viewPastAppointments(scanner.nextLine());
-                case 9 -> running = false;
+                case 9 -> main(null);
                 default -> System.out.println("Invalid choice.");
             }
         }
@@ -184,7 +203,7 @@ public class Main {
                 case 5 -> handleAppointmentRequests(scanner);
                 case 6 -> viewUpcomingAppointments();
                 case 7 -> recordAppointmentOutcome(scanner);
-                case 8 -> running = false;
+                case 8 -> main(null);
                 default -> System.out.println("Invalid choice. Please try again.");
             }
         }
@@ -291,7 +310,7 @@ public class Main {
                 case 2 -> updatePrescriptionStatus(scanner);
                 case 3 -> viewMedicationInventory();
                 case 4 -> submitReplenishmentRequest(scanner);
-                case 5 -> running = false;
+                case 5 -> main(null);
                 default -> System.out.println("Invalid choice. Please try again.");
             }
         }
@@ -348,7 +367,7 @@ public class Main {
                 case 2 -> viewAppointmentDetails();
                 case 3 -> manageMedicationInventory(scanner);
                 case 4 -> approveReplenishmentRequest(scanner);
-                case 5 -> running = false;
+                case 5 -> main(null);
                 default -> System.out.println("Invalid choice. Please try again.");
             }
         }

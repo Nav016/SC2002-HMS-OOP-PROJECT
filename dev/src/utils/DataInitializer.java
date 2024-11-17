@@ -32,7 +32,7 @@ public class DataInitializer {
 
     private void loadDoctors() {
         try (BufferedReader br = new BufferedReader(new FileReader(DOCTORS_CSV))) {
-            String line;
+            String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 6) {
@@ -55,7 +55,7 @@ public class DataInitializer {
 
     private void loadPatients() {
         try (BufferedReader br = new BufferedReader(new FileReader(PATIENTS_CSV))) {
-            String line;
+            String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 7) {
@@ -79,7 +79,7 @@ public class DataInitializer {
 
     private void loadUsersFromCSV(String fileName, String role) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
+            String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 5) {
@@ -106,7 +106,7 @@ public class DataInitializer {
     }
     private void loadMedicineInventory() {
         try (BufferedReader br = new BufferedReader(new FileReader(MEDICINES_CSV))) {
-            String line;
+            String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data.length == 3) {
