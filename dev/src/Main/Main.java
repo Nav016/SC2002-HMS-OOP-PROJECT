@@ -1,4 +1,4 @@
-
+package Main;
 
 import java.util.Scanner;
 import models.*;
@@ -154,8 +154,8 @@ public class Main {
                     // Update personal info (method would need to be implemented)
                     medicalRecordService.updatePhoneEmail(patientID, phone, email);
                 }
-                case 3 -> appointmentService.viewAvailableAppointments(scanner.nextLine());
-                case 4 -> {
+                case 3 -> {
+                    appointmentService.viewAvailableAppointments(scanner.nextLine());
                     System.out.print("Enter Doctor ID: ");
                     String doctorID = scanner.nextLine();
                     System.out.print("Enter date (yyyy-mm-dd): ");
