@@ -3,6 +3,7 @@ package models;
 import services.AppointmentService;
 import services.MedicalRecordService;
 
+
 public class Patient extends User {
     private String patientID;
     private String bloodType;
@@ -11,8 +12,8 @@ public class Patient extends User {
 
     // Constructor
     public Patient(String hospitalID, String password, String name, String email, String phone, 
-                   String patientID, String bloodType, MedicalRecordService medicalRecordService, AppointmentService appointmentService) {
-        super(hospitalID, password, name, email, phone);
+                   String patientID, String bloodType, String gender, String dob, MedicalRecordService medicalRecordService, AppointmentService appointmentService) {
+        super(hospitalID, password, name, email, phone, dob, gender);
         this.patientID = patientID;
         this.bloodType = bloodType;
         this.medicalRecordService = medicalRecordService;
@@ -21,7 +22,12 @@ public class Patient extends User {
 
     // Role-specific methods
     public void viewMedicalRecord() {
-        medicalRecordService.viewMedicalRecords(patientID);
+        medicalRecordService.viewMedicalRecords(patientID);     
+        
+    }
+
+    public void createRecord(){
+        medicalRecordService.createMedicalRecord(patientID, name, dob, gender, phone, email, bloodType);
     }
 
     public void updatePersonalInfo(String email, String phone) {

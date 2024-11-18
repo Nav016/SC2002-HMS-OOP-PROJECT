@@ -5,13 +5,25 @@ import java.util.List;
 
 public class MedicalRecord {
     private String patientID;
+    private String name;
+    private String dob;
+    private String gender;
+    private String contactNo;
+    private String email;
+    private String bloodType;
     private List<String> diagnoses;
     private List<String> treatments;
     private List<String> appointmentOutcomes;
 
     // Constructor
-    public MedicalRecord(String patientID) {
+    public MedicalRecord(String patientID, String name, String dob, String gender, String contactNo, String email, String bloodType) {
         this.patientID = patientID;
+        this.name = name;
+        this.dob = dob;
+        this.gender = gender;
+        this.contactNo = contactNo;
+        this.email = email;
+        this.bloodType = bloodType;
         this.diagnoses = new ArrayList<>();
         this.treatments = new ArrayList<>();
         this.appointmentOutcomes = new ArrayList<>();
@@ -20,6 +32,38 @@ public class MedicalRecord {
     // Getters and Setters
     public String getPatientID() {
         return patientID;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getDob(){
+        return dob;
+    }
+
+    public String getGender(){
+        return gender;
+    }
+
+    public String getContactNo(){
+        return contactNo;
+    }
+
+    public void setContactNo(String contactNo){
+        this.contactNo = contactNo;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public String getBloodType(){
+        return bloodType;
     }
 
     public List<String> getDiagnoses() {

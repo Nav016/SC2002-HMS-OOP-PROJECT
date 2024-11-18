@@ -8,9 +8,9 @@ public class Pharmacist extends User {
     private InventoryService inventoryService;
 
     // Constructor
-    public Pharmacist(String hospitalID, String password, String name, String email, String phone,
+    public Pharmacist(String hospitalID, String password, String name, String email, String phone, String dob, String gender,
                       PrescriptionService prescriptionService, InventoryService inventoryService) {
-        super(hospitalID, password, name, email, phone);
+        super(hospitalID, password, name, email, phone, dob, gender);
         this.prescriptionService = prescriptionService;
         this.inventoryService = inventoryService;
     }

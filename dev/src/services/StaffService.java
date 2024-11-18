@@ -8,6 +8,8 @@ import models.Doctor;
 import models.Pharmacist;
 import models.User;
 
+
+
 public class StaffService {
     private List<User> staffList;
 
@@ -33,14 +35,16 @@ public class StaffService {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 6) {
+                if (data.length == 8) {
                     String hospitalID = data[0];
                     String password = data[1];
                     String name = data[2];
                     String email = data[3];
                     String phone = data[4];
-                    String specialization = data[5];
-                    Doctor doctor = new Doctor(hospitalID, password, name, email, phone, specialization, null, null);
+                    String dob = data[5];
+                    String gender = data[6];
+                    String specialization = data[7];
+                    Doctor doctor = new Doctor(hospitalID, password, name, email, phone, dob, gender, specialization, null, null);
                     staffList.add(doctor);
                 }
             }
@@ -56,13 +60,15 @@ public class StaffService {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 5) {
+                if (data.length == 7) {
                     String hospitalID = data[0];
                     String password = data[1];
                     String name = data[2];
                     String email = data[3];
                     String phone = data[4];
-                    Administrator administrator = new Administrator(hospitalID, password, name, email, phone, null, null, null);
+                    String dob = data[5];
+                    String gender = data[6];
+                    Administrator administrator = new Administrator(hospitalID, password, name, email, phone, dob, gender, null, null, null);
                     staffList.add(administrator);
                 }
             }
@@ -78,13 +84,15 @@ public class StaffService {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 5) {
+                if (data.length == 7) {
                     String hospitalID = data[0];
                     String password = data[1];
                     String name = data[2];
                     String email = data[3];
                     String phone = data[4];
-                    Pharmacist pharmacist = new Pharmacist(hospitalID, password, name, email, phone, null, null);
+                    String dob = data[5];
+                    String gender = data[6];
+                    Pharmacist pharmacist = new Pharmacist(hospitalID, password, name, email, phone, dob, gender, null, null);
                     staffList.add(pharmacist);
                 }
             }

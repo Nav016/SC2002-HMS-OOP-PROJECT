@@ -6,6 +6,7 @@ import java.io.IOException;
 import models.*;
 import services.AuthenticationService;
 import services.InventoryService;
+import services.MedicalRecordService;
 
 public class DataInitializer {
     private static final String DOCTORS_CSV = "csv_files/Doctors.csv";
@@ -16,10 +17,12 @@ public class DataInitializer {
 
     private final AuthenticationService authenticationService;
     private final InventoryService inventoryService;
+    private final MedicalRecordService medicalRecordService;
 
-    public DataInitializer(AuthenticationService authenticationService, InventoryService inventoryService) {
+    public DataInitializer(AuthenticationService authenticationService, InventoryService inventoryService, MedicalRecordService medicalRecordService) {
         this.authenticationService = authenticationService;
         this.inventoryService = inventoryService;
+        this.medicalRecordService = medicalRecordService;
     }
 
     public void loadInitialData() {
@@ -35,16 +38,18 @@ public class DataInitializer {
             String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 6) {
+                if (data.length == 8) {
                     String hospitalID = data[0];
                     String password = data[1];
                     String name = data[2];
                     String email = data[3];
                     String phone = data[4];
-                    String specialization = data[5];
+                    String dob = data[5];
+                    String gender = data[6];
+                    String specialization = data[7];
 
                     // Create a new Doctor object and add it to the AuthenticationService
-                    Doctor doctor = new Doctor(hospitalID, password, name, email, phone, specialization, null, null);
+                    Doctor doctor = new Doctor(hospitalID, password, name, email, phone, dob, gender, specialization, null, null);
                     authenticationService.addUser(doctor);
                 }
             }
@@ -58,18 +63,22 @@ public class DataInitializer {
             String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 7) {
+                if (data.length == 9) {
                     String hospitalID = data[0];
                     String password = data[1];
                     String name = data[2];
                     String email = data[3];
                     String phone = data[4];
-                    String patientID = data[5];
-                    String bloodType = data[6];
+                    String dob = data[5];
+                    String gender = data[6];
+                    String patientID = data[7];
+                    String bloodType = data[8];
+                    
 
                     // Create a new Patient object and add it to the AuthenticationService
-                    Patient patient = new Patient(hospitalID, password, name, email, phone, patientID, bloodType, null, null);
+                    Patient patient = new Patient(hospitalID, password, name, email, phone, dob, gender, patientID, bloodType,  null, null);
                     authenticationService.addUser(patient);
+                    medicalRecordService.createMedicalRecord(patientID, name, dob, gender, patientID, email, bloodType);
                 }
             }
         } catch (IOException e) {
@@ -82,17 +91,19 @@ public class DataInitializer {
             String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
-                if (data.length == 5) {
+                if (data.length == 7) {
                     String hospitalID = data[0];
                     String password = data[1];
                     String name = data[2];
                     String email = data[3];
                     String phone = data[4];
+                    String dob = data[5];
+                    String gender = data[6];
 
                     User user = null;
                     switch (role) {
-                        case "pharmacist" -> user = new Pharmacist(hospitalID, password, name, email, phone, null, null);
-                        case "administrator" -> user = new Administrator(hospitalID, password, name, email, phone, null, null, null);
+                        case "pharmacist" -> user = new Pharmacist(hospitalID, password, name, email, phone, dob, gender, null, null);
+                        case "administrator" -> user = new Administrator(hospitalID, password, name, email, phone, dob, gender, null, null, null);
                     }
 
                     if (user != null) {

@@ -1,9 +1,10 @@
-package Main;
+
 
 import java.util.Scanner;
 import models.*;
 import services.*;
 import utils.DataInitializer;
+
 
 public class Main {
     private static AuthenticationService authenticationService = new AuthenticationService();
@@ -12,7 +13,7 @@ public class Main {
     private static AppointmentService appointmentService = new AppointmentService();
     private static MedicalRecordService medicalRecordService = new MedicalRecordService();
     private static PrescriptionService prescriptionService = new PrescriptionService();
-    private static DataInitializer dataInitializer = new DataInitializer(authenticationService, inventoryService);
+    private static DataInitializer dataInitializer = new DataInitializer(authenticationService, inventoryService, medicalRecordService);
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Hospital Management System (HMS)");
@@ -100,6 +101,10 @@ public class Main {
         String phone = scanner.nextLine();
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
+        System.out.println("Enter your Date of Birth: ");
+        String dob = scanner.nextLine();
+        System.out.println("Enter your Gender: ");
+        String gender = scanner.nextLine();
 
         String additionalInfo1 = null, additionalInfo2 = null;
         if ("doctor".equals(role)) {
@@ -112,7 +117,7 @@ public class Main {
             additionalInfo2 = scanner.nextLine();
         }
 
-        User newUser = authenticationService.createUser(role, hospitalID, password, name, email, phone, additionalInfo1, additionalInfo2);
+        User newUser = authenticationService.createUser(role, hospitalID, password, name, email, phone, dob, gender, additionalInfo1, additionalInfo2);
         if (newUser != null) {
             System.out.println("Account created successfully. You can now sign in.");
         } else {
@@ -141,11 +146,14 @@ public class Main {
                     medicalRecordService.viewMedicalRecords(scanner.nextLine());
                 }
                 case 2 -> {
+                    System.out.println("Enter Patient ID: ");
+                    String patientID = scanner.nextLine();
                     System.out.print("Enter new email: ");
                     String email = scanner.nextLine();
                     System.out.print("Enter new phone: ");
                     String phone = scanner.nextLine();
                     // Update personal info (method would need to be implemented)
+                    medicalRecordService.updatePhoneEmail(patientID, phone, email);
                 }
                 case 3 -> appointmentService.viewAvailableAppointments(scanner.nextLine());
                 case 4 -> {
@@ -409,18 +417,22 @@ public class Main {
         String email = scanner.nextLine();
         System.out.print("Enter Phone: ");
         String phone = scanner.nextLine();
+        System.out.println("Enter Date of Birth: ");
+        String dob = scanner.nextLine();
+        System.out.println("Enter Gender: ");
+        String gender = scanner.nextLine();
         String specialization = null;
 
         User user = switch (role.toLowerCase()) {
             case "doctor" -> {
                 System.out.print("Enter Specialization: ");
                 specialization = scanner.nextLine();
-                yield new Doctor(hospitalID, "password", name, email, phone, specialization, appointmentService,
+                yield new Doctor(hospitalID, "password", name, email, phone, dob, gender, specialization, appointmentService,
                         medicalRecordService);
             }
             case "pharmacist" ->
-                new Pharmacist(hospitalID, "password", name, email, phone, prescriptionService, inventoryService);
-            case "administrator" -> new Administrator(hospitalID, "password", name, email, phone, staffService,
+                new Pharmacist(hospitalID, "password", name, email, phone, dob, gender, prescriptionService, inventoryService);
+            case "administrator" -> new Administrator(hospitalID, "password", name, email, phone, dob, gender, staffService,
                     inventoryService, appointmentService);
             default -> null;
         };

@@ -3,15 +3,16 @@ package models;
 import services.AppointmentService;
 import services.MedicalRecordService;
 
+
 public class Doctor extends User {
     private String specialization;
     private AppointmentService appointmentService;
     private MedicalRecordService medicalRecordService;
 
     // Constructor
-    public Doctor(String hospitalID, String password, String name, String email, String phone,
+    public Doctor(String hospitalID, String password, String name, String email, String phone, String dob, String gender,
                   String specialization, AppointmentService appointmentService, MedicalRecordService medicalRecordService) {
-        super(hospitalID, password, name, email, phone);
+        super(hospitalID, password, name, email, phone, dob, gender);
         this.specialization = specialization;
         this.appointmentService = appointmentService;
         this.medicalRecordService = medicalRecordService;

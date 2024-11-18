@@ -2,19 +2,23 @@ package models;
 
 public abstract class User {
 
-    private String hospitalID;
+    public String hospitalID;
     private String password;
-    private String name;
-    private String email;
-    private String phone;
+    public String name;
+    public String email;
+    public String phone;
+    public String dob;
+    public String gender;
 
     // Constructor
-    public User(String hospitalID, String password, String name, String email, String phone) {
+    public User(String hospitalID, String password, String name, String email, String phone, String dob, String gender) {
         this.hospitalID = hospitalID;
         this.password = password;
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.dob = dob;
+        this.gender = gender;
     }
 
     // Getters and Setters
@@ -52,6 +56,22 @@ public abstract class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getdob(){
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     // Abstract method for role-specific menu

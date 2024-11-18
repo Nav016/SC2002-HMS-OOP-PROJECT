@@ -10,9 +10,9 @@ public class Administrator extends User {
     private AppointmentService appointmentService;
 
     // Constructor
-    public Administrator(String hospitalID, String password, String name, String email, String phone,
+    public Administrator(String hospitalID, String password, String name, String email, String phone, String dob, String gender,
                          StaffService staffService, InventoryService inventoryService, AppointmentService appointmentService) {
-        super(hospitalID, password, name, email, phone);
+        super(hospitalID, password, name, email, phone, dob, gender);
         this.staffService = staffService;
         this.inventoryService = inventoryService;
         this.appointmentService = appointmentService;
