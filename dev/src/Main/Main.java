@@ -126,29 +126,21 @@ public class Main {
         boolean running = true;
         while (running) {
             System.out.println("1. View Medical Record");
-            System.out.println("2. Update Personal Information");
-            System.out.println("3. View Available Appointment Slots");
-            System.out.println("4. Schedule an Appointment");
-            System.out.println("5. Reschedule an Appointment");
-            System.out.println("6. Cancel an Appointment");
-            System.out.println("7. View Scheduled Appointments");
-            System.out.println("8. View Past Appointment Outcome Records");
-            System.out.println("9. Logout");
+            System.out.println("2. View Available Appointment Slots");
+            System.out.println("3. Schedule an Appointment");
+            System.out.println("4. Reschedule an Appointment");
+            System.out.println("5. Cancel an Appointment");
+            System.out.println("6. View Scheduled Appointments");
+            System.out.println("7. View Past Appointment Outcome Records");
+            System.out.println("8. Logout");
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1 -> {
                     System.out.println("Enter Patient ID");
                     medicalRecordService.viewMedicalRecords(scanner.nextLine());
                 }
-                case 2 -> {
-                    System.out.print("Enter new email: ");
-                    String email = scanner.nextLine();
-                    System.out.print("Enter new phone: ");
-                    String phone = scanner.nextLine();
-                    // Update personal info (method would need to be implemented)
-                }
-                case 3 -> appointmentService.viewAvailableAppointments(scanner.nextLine());
-                case 4 -> {
+                case 2 -> appointmentService.viewAvailableAppointments(scanner.nextLine());
+                case 3 -> {
                     System.out.print("Enter Doctor ID: ");
                     String doctorID = scanner.nextLine();
                     System.out.print("Enter date (yyyy-mm-dd): ");
@@ -157,7 +149,7 @@ public class Main {
                     String time = scanner.nextLine();
                     appointmentService.scheduleAppointment(scanner.nextLine(), doctorID, date, time);
                 }
-                case 5 -> {
+                case 4 -> {
                     System.out.print("Enter Appointment ID: ");
                     String appointmentID = scanner.nextLine();
                     System.out.print("Enter new date (yyyy-mm-dd): ");
@@ -166,13 +158,13 @@ public class Main {
                     String newTime = scanner.nextLine();
                     appointmentService.rescheduleAppointment(appointmentID, newDate, newTime);
                 }
-                case 6 -> {
+                case 5 -> {
                     System.out.print("Enter Appointment ID: ");
                     appointmentService.cancelAppointment(scanner.nextLine());
                 }
-                case 7 -> appointmentService.viewPatientAppointments(scanner.nextLine());
-                case 8 -> medicalRecordService.viewPastAppointments(scanner.nextLine());
-                case 9 -> main(null);
+                case 6 -> appointmentService.viewPatientAppointments(scanner.nextLine());
+                case 7 -> medicalRecordService.viewPastAppointments(scanner.nextLine());
+                case 8 -> main(null);
                 default -> System.out.println("Invalid choice.");
             }
         }
