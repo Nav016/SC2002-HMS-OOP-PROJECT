@@ -1,5 +1,5 @@
-package Main;
 
+import java.util.Random;
 import java.util.Scanner;
 import models.*;
 import services.*;
@@ -71,6 +71,13 @@ public class Main {
             return false; // Sign-in failed
         }
     }
+    
+    public static String generatePatientID() 
+    {
+        Random random = new Random();
+        int randomNumber = random.nextInt(900) + 100; // Generates a random number between 100 and 999
+        return "PID" + randomNumber;
+    }
 
     private static void createNewAccount(Scanner scanner) {
         System.out.println("Create a New Account:");
@@ -111,15 +118,18 @@ public class Main {
             System.out.print("Enter specialization: ");
             additionalInfo1 = scanner.nextLine();
         } else if ("patient".equals(role)) {
-            System.out.print("Enter patient ID: ");
-            additionalInfo1 = scanner.nextLine();
+            String patientID = generatePatientID();
+            additionalInfo1 = patientID;
             System.out.print("Enter blood type: ");
             additionalInfo2 = scanner.nextLine();
+            System.out.println("Your patient ID is " + patientID);
+            medicalRecordService.createMedicalRecord(patientID, name, dob, gender, phone, email, additionalInfo2);
         }
 
         User newUser = authenticationService.createUser(role, hospitalID, password, name, email, phone, dob, gender, additionalInfo1, additionalInfo2);
         if (newUser != null) {
             System.out.println("Account created successfully. You can now sign in.");
+           
         } else {
             System.out.println("Failed to create account. Please try again.");
         }
@@ -560,5 +570,7 @@ public class Main {
             System.out.println("Medicine not found or request could not be approved.");
         }
     }
+
+
 
 }
