@@ -1,3 +1,4 @@
-hospitalID,password,name,email,phone
-PH001,password123,Pharmacist Paul,paul@example.com,1112223333
-PH002,password123,Sarah,sara@example.com,11111111
+hospitalID,password,name,email,phone, dob, gender
+PH001,password123,Pharmacist Paul,paul@example.com,1112223333, 01/01/01, Male
+PH002,password123,Sarah,sara@example.com,11111111, 12/04/03, Female
+P005,password,ShiKai,sk@company.com,90239039, 07/12/99, Male
