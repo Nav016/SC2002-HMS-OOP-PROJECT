@@ -4,15 +4,7 @@ Welcome to HMS (Health Managmement System)
 
 # What is HMS
 
-Brief Description of the project
-
-# How to Access
-
-Basic user instructions
-
-# Using the application as a User
-
-Basic user guide
+The Hospital Management System (HMS) was built with a focus on creating a flexible and modular structure to efficiently handle various hospital operations, such as user authentication, managing appointments, and tracking inventory. The system is designed to be easy to extend and maintain by keeping different services separate and following key software design principles like SOLID. This approach ensures that the system can grow over time while remaining clean, organized, and reliable.
 
 # Location of Code
 All Java files are located in /dev/src
