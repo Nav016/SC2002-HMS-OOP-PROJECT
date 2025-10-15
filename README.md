@@ -12,7 +12,4 @@ All Java files are located in /dev/src
 # Location of UML Diagram
 UML Diagram file and image are located in /Resource/UML Class Diagram
 
-# Project Demo Video
-- make a yt video and put link here
-
 
